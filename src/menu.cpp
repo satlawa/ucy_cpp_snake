@@ -1,10 +1,12 @@
 #include "menu.h"
 #include <iostream>
 #include <array>
+#include <vector>
 
 
-Menu::Menu(FileController &file_controller)
-    : file_controller(file_controller) {}
+/*Menu::Menu() {
+  FileController file_controller;
+}*/
 
 
 void Menu::PrintMainMenu() {
@@ -94,6 +96,13 @@ void Menu::MainMenu() {
   file_controller.ReadOptions(options);
   file_controller.ReadHighscore(highscores);
 
+  constexpr std::size_t kFramesPerSecond{60};
+  constexpr std::size_t kMsPerFrame{1000 / kFramesPerSecond};
+  constexpr std::size_t kScreenWidth{640};
+  constexpr std::size_t kScreenHeight{640};
+  constexpr std::size_t kGridWidth{32};
+  constexpr std::size_t kGridHeight{32};
+
   int choice;
   bool stay = true;
 
@@ -103,6 +112,14 @@ void Menu::MainMenu() {
 
     if (choice == 0) {
       // run game
+      Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
+      Controller controller;
+      Game game(kGridWidth, kGridHeight, options[1], options[2]);
+      int score = game.Run(controller, renderer, kMsPerFrame);
+      std::cout << "Score: " << score << '\n';
+      AddHighscore(score);
+      file_controller.WriteHighscore(highscores);
+
 
     } else if (choice == 1) {
       // enter highscores
@@ -186,6 +203,47 @@ void Menu::HighscoresMenu() {
   } while(stay == true);
 }
 
+/*
+void Menu::AddHighscore(int &score) {
+  highscores[0] = score;
+}
+*/
+
+void Menu::AddHighscore(int &score) {
+  std::cout << "score : " << score << "\n";
+  //std::vector<int> v;
+
+  int i = 4;
+  while (highscores[i] < score && i >= 0) {
+    if (i < 4) {
+      highscores[i+1] = highscores[i];
+    }
+    i--;
+    std::cout << "i : " << i << "\n";
+  }
+  if (i < 4) {
+    highscores[i+1] = score;
+  }
+  std::cout << "------------------------------- "<< "\n";
+  for (int j=0; j<5; j++){
+    std::cout << "highscores[i] : " << j << " - "<< highscores[j] << "\n";
+  }
+  std::cout << "------------------------------- "<< "\n";
+}
+
+/*
+int Menu::AddHighscore(int i) {
+  if (highscores[i] < score) {
+    return AddHighscore(--i);
+  }
+  else {
+    int temp = highscores[i];
+    highscores[i] = score;
+    std::cout << i << "All Highscores successfully set to 0\n";
+    return temp;
+  }
+}
+*/
 /*
 int main() {
 

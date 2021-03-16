@@ -6,27 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/philipp/Code/cpp/ucy_cpp_snake/src/controller.cpp
-controller.h
-/home/philipp/Code/cpp/ucy_cpp_snake/src/controller.h
-iostream
--
-SDL.h
-/home/philipp/Code/cpp/ucy_cpp_snake/src/SDL.h
-snake.h
-/home/philipp/Code/cpp/ucy_cpp_snake/src/snake.h
-
 /home/philipp/Code/cpp/ucy_cpp_snake/src/controller.h
 snake.h
 /home/philipp/Code/cpp/ucy_cpp_snake/src/snake.h
 
-/home/philipp/Code/cpp/ucy_cpp_snake/src/game.cpp
-game.h
-/home/philipp/Code/cpp/ucy_cpp_snake/src/game.h
-iostream
+/home/philipp/Code/cpp/ucy_cpp_snake/src/file_controller.h
+array
 -
-SDL.h
-/home/philipp/Code/cpp/ucy_cpp_snake/src/SDL.h
 
 /home/philipp/Code/cpp/ucy_cpp_snake/src/game.h
 random
@@ -40,22 +26,28 @@ renderer.h
 snake.h
 /home/philipp/Code/cpp/ucy_cpp_snake/src/snake.h
 
-/home/philipp/Code/cpp/ucy_cpp_snake/src/main.cpp
+/home/philipp/Code/cpp/ucy_cpp_snake/src/menu.cpp
+menu.h
+/home/philipp/Code/cpp/ucy_cpp_snake/src/menu.h
 iostream
 -
+array
+-
+vector
+-
+
+/home/philipp/Code/cpp/ucy_cpp_snake/src/menu.h
 controller.h
 /home/philipp/Code/cpp/ucy_cpp_snake/src/controller.h
 game.h
 /home/philipp/Code/cpp/ucy_cpp_snake/src/game.h
 renderer.h
 /home/philipp/Code/cpp/ucy_cpp_snake/src/renderer.h
-
-/home/philipp/Code/cpp/ucy_cpp_snake/src/renderer.cpp
-renderer.h
-/home/philipp/Code/cpp/ucy_cpp_snake/src/renderer.h
+file_controller.h
+/home/philipp/Code/cpp/ucy_cpp_snake/src/file_controller.h
 iostream
 -
-string
+array
 -
 
 /home/philipp/Code/cpp/ucy_cpp_snake/src/renderer.h
@@ -65,14 +57,6 @@ SDL.h
 /home/philipp/Code/cpp/ucy_cpp_snake/src/SDL.h
 snake.h
 /home/philipp/Code/cpp/ucy_cpp_snake/src/snake.h
-
-/home/philipp/Code/cpp/ucy_cpp_snake/src/snake.cpp
-snake.h
-/home/philipp/Code/cpp/ucy_cpp_snake/src/snake.h
-cmath
--
-iostream
--
 
 /home/philipp/Code/cpp/ucy_cpp_snake/src/snake.h
 vector

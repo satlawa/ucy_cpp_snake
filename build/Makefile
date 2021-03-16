@@ -150,6 +150,33 @@ src/controller.cpp.s:
 	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/controller.cpp.s
 .PHONY : src/controller.cpp.s
 
+src/file_controller.o: src/file_controller.cpp.o
+
+.PHONY : src/file_controller.o
+
+# target to build an object file
+src/file_controller.cpp.o:
+	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/file_controller.cpp.o
+.PHONY : src/file_controller.cpp.o
+
+src/file_controller.i: src/file_controller.cpp.i
+
+.PHONY : src/file_controller.i
+
+# target to preprocess a source file
+src/file_controller.cpp.i:
+	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/file_controller.cpp.i
+.PHONY : src/file_controller.cpp.i
+
+src/file_controller.s: src/file_controller.cpp.s
+
+.PHONY : src/file_controller.s
+
+# target to generate assembly for a file
+src/file_controller.cpp.s:
+	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/file_controller.cpp.s
+.PHONY : src/file_controller.cpp.s
+
 src/game.o: src/game.cpp.o
 
 .PHONY : src/game.o
@@ -203,6 +230,33 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/menu.o: src/menu.cpp.o
+
+.PHONY : src/menu.o
+
+# target to build an object file
+src/menu.cpp.o:
+	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/menu.cpp.o
+.PHONY : src/menu.cpp.o
+
+src/menu.i: src/menu.cpp.i
+
+.PHONY : src/menu.i
+
+# target to preprocess a source file
+src/menu.cpp.i:
+	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/menu.cpp.i
+.PHONY : src/menu.cpp.i
+
+src/menu.s: src/menu.cpp.s
+
+.PHONY : src/menu.s
+
+# target to generate assembly for a file
+src/menu.cpp.s:
+	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/menu.cpp.s
+.PHONY : src/menu.cpp.s
 
 src/renderer.o: src/renderer.cpp.o
 
@@ -270,12 +324,18 @@ help:
 	@echo "... src/controller.o"
 	@echo "... src/controller.i"
 	@echo "... src/controller.s"
+	@echo "... src/file_controller.o"
+	@echo "... src/file_controller.i"
+	@echo "... src/file_controller.s"
 	@echo "... src/game.o"
 	@echo "... src/game.i"
 	@echo "... src/game.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/menu.o"
+	@echo "... src/menu.i"
+	@echo "... src/menu.s"
 	@echo "... src/renderer.o"
 	@echo "... src/renderer.i"
 	@echo "... src/renderer.s"

@@ -8,11 +8,14 @@ class Snake {
  public:
   enum class Direction { kUp, kDown, kLeft, kRight };
 
-  Snake(int grid_width, int grid_height)
+  Snake(int grid_width, int grid_height, int snake_speed,
+    int snake_speed_increase)
       : grid_width(grid_width),
         grid_height(grid_height),
         head_x(grid_width / 2),
-        head_y(grid_height / 2) {}
+        head_y(grid_height / 2),
+        speed((float)snake_speed/(float)100.0),
+        speed_increase((float)snake_speed_increase/(float)100.0) {}
 
   void Update();
 
@@ -30,13 +33,14 @@ class Snake {
   Direction GetDirection() const { return direction; }
   void SetDirection(Direction dir) { direction = dir; }
 
-  void IncreaseSpeed(float increase) { speed += increase; }
+  void IncreaseSpeed() { speed += speed_increase; }
 
  private:
   void UpdateHead();
   void UpdateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
 
   float speed{0.1f};
+  float speed_increase{0.01f};
   int size{1};
   bool alive{true};
 

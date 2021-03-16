@@ -2,15 +2,16 @@
 #include <iostream>
 #include "SDL.h"
 
-Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : snake(grid_width, grid_height),
+Game::Game(std::size_t grid_width, std::size_t grid_height, int snake_speed,
+  int snake_speed_increase)
+    : snake(grid_width, grid_height, snake_speed, snake_speed_increase),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width-1)),
       random_h(0, static_cast<int>(grid_height-1)) {
   PlaceFood();
 }
 
-void Game::Run(Controller const &controller, Renderer &renderer,
+int Game::Run(Controller const &controller, Renderer &renderer,
                std::size_t target_frame_duration) {
   Uint32 title_timestamp = SDL_GetTicks();
   Uint32 frame_start;
@@ -48,6 +49,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
       SDL_Delay(target_frame_duration - frame_duration);
     }
   }
+  return score;
 }
 
 void Game::PlaceFood() {
@@ -80,7 +82,7 @@ void Game::Update() {
     PlaceFood();
     // Grow snake and increase speed.
     snake.GrowBody();
-    snake.IncreaseSpeed(0.01);
+    snake.IncreaseSpeed();
   }
 }
 
