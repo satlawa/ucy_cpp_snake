@@ -1,32 +1,28 @@
-#ifndef FUNCTIONS_H_INCLUDED
-#define FUNCTIONS_H_INCLUDED
+#ifndef MENU_H
+#define MENU_H
 
+#include "file_controller.h"
 #include <iostream>
 #include <array>
 
+class Menu {
+ public:
+   Menu(FileController &file_controller);
+   void MainMenu();
 
-struct options {
-  int world_size = 32;
-  float snake_speed = 0.1;
-  float snake_increase_speed = 0.02;
+ private:
+  int ConsoleInputInt(int min, int max);
+  float ConsoleInputFloat(float min, float max);
+
+  void OptionsMenu();
+  void HighscoresMenu();
+
+  void PrintMainMenu();
+  void PrintOptionsMenu();
+  void PrintHighscoresMenu();
+
+  std::array<int, 5> highscores = { 9, 7, 5, 3, 1 };
+  std::array<int, 3> options = { 32, 10, 1 };
 };
-
-int world_size = 32;
-float snake_speed = 0.1;
-float snake_increase_speed = 0.02;
-
-std::array<int, 5> highscores = { 9, 7, 5, 3, 1 };
-//int highscores[5] = {5,3,2,1,0};
-
-//void Menu::PrintMainMenu() {
-void PrintMainMenu();
-void PrintOptionsMenu();
-void PrintHighscores();
-
-int ConsoleInput(int min, int max);
-
-void OptionsMenu();
-void MainMenu();
-void HighscoresMenu();
 
 #endif

@@ -1,6 +1,17 @@
 #include "menu.h"
 #include <iostream>
 #include <array>
+
+
+Menu::Menu(FileController &file_controller) {
+  file_controller.ReadOptions(options);
+  file_controller.ReadHighscore(highscores);
+}
+
+//opt.world_size = 0;
+//opt.snake_speed = 0.0;
+//opt.snake_increase_speed = 0.0;
+
 /*
 Menu::Menu(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height),
@@ -21,9 +32,9 @@ int highscores[5] = {5,3,2,1,0};
 */
 
 //void Menu::PrintMainMenu() {
-void PrintMainMenu() {
+void Menu::PrintMainMenu() {
   // clear console
-  std::cout << "\033c";
+  //std::cout << "\033c";
   // print out game title and menu options to console
   std::cout << "==========================================" << '\n';
   std::cout << "===========   THE SNAKE GAME   ===========" << '\n';
@@ -39,17 +50,17 @@ void PrintMainMenu() {
   std::cout << "Please enter the number of your choice: ";
 }
 
-void PrintOptionsMenu() {
+void Menu::PrintOptionsMenu() {
   // clear console
-  std::cout << "\033c";
+  //std::cout << "\033c";
   // print out game title and menu options to console
   std::cout << "==========================================" << '\n';
   std::cout << "============   GAME OPTIONS   ============" << '\n';
   std::cout << "==========================================" << '\n';
   std::cout << " " << '\n';
-  std::cout << "   World Size:                " << world_size << '\n';
-  std::cout << "   Initial Snake Speed:       " << snake_speed << '\n';
-  std::cout << "   Increase in Snake Speed:   " << snake_increase_speed << '\n';
+  std::cout << "   World Size:                " << options[0] << '\n';
+  std::cout << "   Initial Snake Speed:       " << options[1] << '\n';
+  std::cout << "   Increase in Snake Speed:   " << options[2] << '\n';
   std::cout << " " << '\n';
   std::cout << "------------------------------------------" << '\n';
   std::cout << " " << '\n';
@@ -63,9 +74,9 @@ void PrintOptionsMenu() {
   std::cout << "Please enter the number of your choice: ";
 }
 
-void PrintHighscoresMenu() {
+void Menu::PrintHighscoresMenu() {
   // clear console
-  std::cout << "\033c";
+  //std::cout << "\033c";
   // print out game title and menu options to console
   std::cout << "==========================================" << '\n';
   std::cout << "=============   HIGHSCORES   =============" << '\n';
@@ -87,7 +98,7 @@ void PrintHighscoresMenu() {
   std::cout << "Please enter the number of your choice: " << '\n';
 }
 
-int ConsoleInputInt(int min, int max) {
+int Menu::ConsoleInputInt(int min, int max) {
   int choice;
   std::cin >> choice;
   while (!std::cin || choice > max || choice < min) {
@@ -100,7 +111,7 @@ int ConsoleInputInt(int min, int max) {
   return choice;
 }
 
-float ConsoleInputFloat(float min, float max) {
+float Menu::ConsoleInputFloat(float min, float max) {
   float choice;
   std::cin >> choice;
   while (!std::cin || choice > max || choice < min) {
@@ -114,7 +125,7 @@ float ConsoleInputFloat(float min, float max) {
 }
 
 //void Menu::MainMenu() {
-void MainMenu() {
+void Menu::MainMenu() {
   int choice;
   bool stay = true;
 
@@ -139,7 +150,7 @@ void MainMenu() {
   } while(stay == true);
 }
 
-void OptionsMenu() {
+void Menu::OptionsMenu() {
   int choice;
   bool stay = true;
 
@@ -149,18 +160,18 @@ void OptionsMenu() {
 
     if (choice == 0) {
       std::cout << "Please enter new World Size (range: 16 - 64): ";
-      world_size = ConsoleInputInt(16, 64);
-      std::cout << "World Size successfully changed to: " << world_size << '\n';
+      options[0] = ConsoleInputInt(16, 64);
+      std::cout << "World Size successfully changed to: " << options[0] << '\n';
 
     } else if (choice == 1) {
-      std::cout << "Please enter new Initial Snake Speed (range: 0.01 - 1.0): ";
-      snake_speed = ConsoleInputFloat(0.01, 1);
-      std::cout << "Initial Snake Speed successfully changed to: " << snake_speed << '\n';
+      std::cout << "Please enter new Initial Snake Speed (range: 1 - 100): ";
+      options[1] = ConsoleInputInt(1, 100);
+      std::cout << "Initial Snake Speed successfully changed to: " << options[1] << '\n';
 
     } else if (choice == 2) {
-      std::cout << "Please enter new Increase in Snake Speed (range: 0.0 - 0.1): ";
-      snake_increase_speed = ConsoleInputFloat(0, 0.1);
-      std::cout << "Increase in Snake Speed successfully changed to: " << snake_increase_speed << '\n';
+      std::cout << "Please enter new Increase in Snake Speed (range: 0 - 10): ";
+      options[2] = ConsoleInputInt(0, 10);
+      std::cout << "Increase in Snake Speed successfully changed to: " << options[2] << '\n';
 
     } else if (choice == 3) {
       stay = false;
@@ -168,7 +179,7 @@ void OptionsMenu() {
   } while(stay == true);
 }
 
-void HighscoresMenu() {
+void Menu::HighscoresMenu() {
   int choice;
   bool stay = true;
 
@@ -190,10 +201,25 @@ void HighscoresMenu() {
   } while(stay == true);
 }
 
+/*
 int main() {
 
-  struct options o;
+  //std::array<int, 5> highscoresX = { 9, 7, 5, 3, 1 };
+  //float options[3] = {0,0,0};
+  FileController file_controller;
+
+  file_controller.ReadHighscore(highscores);
+  for(int i = 0; i < 5; i++) {
+    std::cout << i << " - " << highscores[i] << "\n";
+  }
+
+  file_controller.ReadOptions(opt);
+  std::cout << "option 1 - " << opt.world_size << "\n";
+  std::cout << "option 1 - " << opt.snake_speed << "\n";
+
+  //struct options o;
   MainMenu();
 
   return 0;
 }
+*/
