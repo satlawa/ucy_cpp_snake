@@ -11,8 +11,8 @@ class Menu {
    void MainMenu();
 
  private:
+  FileController file_controller;
   int ConsoleInputInt(int min, int max);
-  float ConsoleInputFloat(float min, float max);
 
   void OptionsMenu();
   void HighscoresMenu();
