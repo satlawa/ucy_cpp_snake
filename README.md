@@ -1,12 +1,27 @@
-# CPPND: Capstone Snake Game Example
+# CPPND: Capstone Snake Game
 
-This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The code for this repo was inspired by [this](https://codereview.stackexchange.com/questions/212296/snake-game-in-c-with-sdl) excellent StackOverflow post and set of responses.
+This is the submission for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The program is an extend of the Snake game provided by Udacitys repo https://github.com/udacity/CppND-Capstone-Snake-Game.
 
-<img src="snake_game.gif"/>
+The core modifications are the following
 
-The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
+Object Oriented
+The provided code was already written in an object oriented way, however the class Snake had attributes that wehere not encapsulated and thus open to user manipulation. This was changed and all Code is now encasulated.
 
-In this project, you can build your own C++ application or extend this Snake game, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
+MENU
+The main enhancment to the project is the addition of a Game menu, that shows up when the user starts the game. The Menu consists of three submenus that have the following possibilities:
+
+The menues allow the user to
+* start the game,
+* look and reset the previous highscores
+* look and change the current game options
+* quit the game
+
+The Menus are implemented in the Class Menu (menu.cpp, menu.h)
+
+I/O
+An further addition is the ability to save the options that the user can manipulate such as snake speed and speed increase and the top 5 highscores to files on the harddisk.
+When this data is manipulation by thee user, it is imedietly written to disk minimizing the data loss in the case of a program crash. In the process of starting the program the data is automatically loaded into the game and is accessable. The reading and writing of the files is implemented in the Class FileController (file_controller.cpp, file_controller.h) and the data is stored in the files options.txt and highscores.txt.
+
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
@@ -29,3 +44,35 @@ In this project, you can build your own C++ application or extend this Snake gam
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./SnakeGame`.
+
+
+### Project Requirements fullfilled
+
+##Loops, Functions, I/O
+
+#The project reads data from a file and process the data, or the program writes data to a file.
+The project reads data from an external file or writes data to a file as part of the necessary operation of the program.
+The project was extended to write game options ans the highscore into a file and reads it with the start of the program. Class FileController is responsible for reading and writing the data to files.
+
+#The project accepts user input and processes the input.
+The project accepts input from a user as part of the necessary operation of the program.
+By adding the menu to the game the user is able to change some basic settings as well as have a look at the highsores.
+
+
+##Object Oriented Programming
+The project code is organized into classes with class attributes to hold the data, and class methods to perform tasks.
+
+#The project uses Object Oriented Programming techniques.
+The project code is organized into classes with class attributes to hold the data, and class methods to perform tasks.
+The whole project is designed with Object Oriented Programming techniques in mind.
+
+#Classes use appropriate access specifiers for class members.
+All class data members are explicitly specified as public, protected, or private.
+All new classes where designd to meet this criteria. Additionally the attributes of the snake class where categorised as private ()
+
+#Class constructors utilize member initialization lists.
+All class members that are set to argument values are initialized through member initialization lists.
+
+#Classes encapsulate behavior.
+Appropriate data and functions are grouped into classes. Member data that is subject to an invariant is hidden from the user. State is accessed via member functions.
+All new classes where designd to meet this criteria. Additionally the attributes of the snake class where encapsulated so that they can be accessed just via member functions.
