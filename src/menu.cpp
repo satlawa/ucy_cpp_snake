@@ -1,18 +1,19 @@
+/*
+Menu Class containing the code for displaying and interacting with the menus.
+*/
+
 #include "menu.h"
 #include <iostream>
 #include <array>
 #include <vector>
-
-
-/*Menu::Menu() {
-  FileController file_controller;
-}*/
+#include <unistd.h>
 
 
 void Menu::PrintMainMenu() {
+// print out game title and menu options to the console
+
   // clear console
-  //std::cout << "\033c";
-  // print out game title and menu options to console
+  std::cout << "\033c";
   std::cout << "==========================================" << '\n';
   std::cout << "===========   THE SNAKE GAME   ===========" << '\n';
   std::cout << "==========================================" << '\n';
@@ -29,9 +30,10 @@ void Menu::PrintMainMenu() {
 
 
 void Menu::PrintOptionsMenu() {
+// print out the current option values and manipulation options to the console
+
   // clear console
-  //std::cout << "\033c";
-  // print out game title and menu options to console
+  std::cout << "\033c";
   std::cout << "==========================================" << '\n';
   std::cout << "============   GAME OPTIONS   ============" << '\n';
   std::cout << "==========================================" << '\n';
@@ -54,9 +56,10 @@ void Menu::PrintOptionsMenu() {
 
 
 void Menu::PrintHighscoresMenu() {
+// print out top 5 highscores and manipulation options to the console
+
   // clear console
-  //std::cout << "\033c";
-  // print out game title and menu options to console
+  std::cout << "\033c";
   std::cout << "==========================================" << '\n';
   std::cout << "=============   HIGHSCORES   =============" << '\n';
   std::cout << "==========================================" << '\n';
@@ -77,7 +80,24 @@ void Menu::PrintHighscoresMenu() {
   std::cout << "Please enter the number of your choice: " << '\n';
 }
 
+void Menu::PrintGameOver(int &score) {
+// print out game over screen
+
+  // clear console
+  std::cout << "\033c";
+  std::cout << "==========================================" << '\n';
+  std::cout << "=============   GAME OVER   ==============" << '\n';
+  std::cout << "==========================================" << '\n';
+  std::cout << " " << '\n';
+  std::cout << "                Score: " << score << '\n';
+  std::cout << " " << '\n';
+  std::cout << "==========================================" << '\n';
+  sleep(1.5);
+}
+
 int Menu::ConsoleInputInt(int min, int max) {
+// checks the imput of the user and declines any input that is
+//    either from another data type or is out of range
   int choice;
   std::cin >> choice;
   while (!std::cin || choice > max || choice < min) {
@@ -92,6 +112,8 @@ int Menu::ConsoleInputInt(int min, int max) {
 
 
 void Menu::MainMenu() {
+// logic of main menu
+
   // read option and highscores from files
   file_controller.ReadOptions(options);
   file_controller.ReadHighscore(highscores);
@@ -100,8 +122,6 @@ void Menu::MainMenu() {
   constexpr std::size_t kMsPerFrame{1000 / kFramesPerSecond};
   constexpr std::size_t kScreenWidth{640};
   constexpr std::size_t kScreenHeight{640};
-  constexpr std::size_t kGridWidth{32};
-  constexpr std::size_t kGridHeight{32};
 
   int choice;
   bool stay = true;
@@ -110,26 +130,30 @@ void Menu::MainMenu() {
     PrintMainMenu();
     choice = ConsoleInputInt(0, 3);
 
+    // start game
     if (choice == 0) {
-      // run game
-      Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
+      // create instances of the folling classes to
+      Renderer renderer(kScreenWidth, kScreenHeight, options[0], options[0]);
       Controller controller;
-      Game game(kGridWidth, kGridHeight, options[1], options[2]);
+      Game game(options[0], options[0], options[1], options[2]);
+      // run game
       int score = game.Run(controller, renderer, kMsPerFrame);
-      std::cout << "Score: " << score << '\n';
-      AddHighscore(score);
-      file_controller.WriteHighscore(highscores);
-
-
-    } else if (choice == 1) {
-      // enter highscores
+      // print Game Over and score
+      PrintGameOver(score);
+      // add highscore to highscore table
+      bool update = AddHighscore(score);
+      if (update == true) {
+        // write highscore to file
+        file_controller.WriteHighscore(highscores);
+      }
+    } // enter highscores
+    else if (choice == 1) {
       HighscoresMenu();
-
-    } else if (choice == 2) {
-      // enter options menu
+    } // enter options menu
+    else if (choice == 2) {
       OptionsMenu();
-    } else if (choice == 3) {
-      // quit game
+    } // quit game
+    else if (choice == 3) {
       stay = false;
     }
   } while(stay == true);
@@ -137,6 +161,8 @@ void Menu::MainMenu() {
 
 
 void Menu::OptionsMenu() {
+// logic of options menu
+
   int choice;
   bool stay = true;
 
@@ -144,32 +170,29 @@ void Menu::OptionsMenu() {
     PrintOptionsMenu();
     choice = ConsoleInputInt(0, 3);
 
+    // change World Size
     if (choice == 0) {
-      // change World Size
       std::cout << "Please enter new World Size (range: 16 - 64): ";
       options[0] = ConsoleInputInt(16, 64);
       // write to file
       file_controller.WriteOptions(options);
       std::cout << "World Size successfully changed to: " << options[0] << '\n';
-
-    } else if (choice == 1) {
-      // change Snake Speed
+    } // change Snake Speed
+    else if (choice == 1) {
       std::cout << "Please enter new Snake Speed (range: 1 - 100): ";
       options[1] = ConsoleInputInt(1, 100);
       // write to file
       file_controller.WriteOptions(options);
       std::cout << "Snake Speed successfully changed to: " << options[1] << '\n';
-
-    } else if (choice == 2) {
-      // change Snake Speed Increase
+    } // change Snake Speed Increase
+    else if (choice == 2) {
       std::cout << "Please enter new Snake Speed Increase (range: 0 - 10): ";
       options[2] = ConsoleInputInt(0, 10);
       // write to file
       file_controller.WriteOptions(options);
       std::cout << "Snake Speed Increase successfully changed to: " << options[2] << '\n';
-
-    } else if (choice == 3) {
-      // go back to main menu
+    } // go back to main menu
+    else if (choice == 3) {
       stay = false;
     }
   } while(stay == true);
@@ -177,6 +200,8 @@ void Menu::OptionsMenu() {
 
 
 void Menu::HighscoresMenu() {
+// logic of highscores menu
+
   int choice;
   bool stay = true;
 
@@ -184,8 +209,8 @@ void Menu::HighscoresMenu() {
     PrintHighscoresMenu();
     choice = ConsoleInputInt(0, 1);
 
+    // reset all highscores
     if (choice == 0) {
-      // reset all highscores
       std::cout << "Are you shure you want to reset all Highscores (Press 'y' to confirm): ";
       char answer;
       std::cin >> answer;
@@ -196,22 +221,17 @@ void Menu::HighscoresMenu() {
         file_controller.WriteHighscore(highscores);
         std::cout << "All Highscores successfully set to 0\n";
       }
-    } else if (choice == 1) {
-      // go back to main menu
+    } // go back to main menu
+    else if (choice == 1) {
       stay = false;
     }
   } while(stay == true);
 }
 
-/*
-void Menu::AddHighscore(int &score) {
-  highscores[0] = score;
-}
-*/
 
-void Menu::AddHighscore(int &score) {
-  std::cout << "score : " << score << "\n";
-  //std::vector<int> v;
+bool Menu::AddHighscore(int &score) {
+// add provided highscore to top 5 highscores, if it is high enough
+//    and sort the highscores
 
   int i = 4;
   while (highscores[i] < score && i >= 0) {
@@ -219,50 +239,11 @@ void Menu::AddHighscore(int &score) {
       highscores[i+1] = highscores[i];
     }
     i--;
-    std::cout << "i : " << i << "\n";
   }
   if (i < 4) {
     highscores[i+1] = score;
-  }
-  std::cout << "------------------------------- "<< "\n";
-  for (int j=0; j<5; j++){
-    std::cout << "highscores[i] : " << j << " - "<< highscores[j] << "\n";
-  }
-  std::cout << "------------------------------- "<< "\n";
-}
-
-/*
-int Menu::AddHighscore(int i) {
-  if (highscores[i] < score) {
-    return AddHighscore(--i);
-  }
-  else {
-    int temp = highscores[i];
-    highscores[i] = score;
-    std::cout << i << "All Highscores successfully set to 0\n";
-    return temp;
+    return true;
+  } else {
+    return false;
   }
 }
-*/
-/*
-int main() {
-
-  //std::array<int, 5> highscoresX = { 9, 7, 5, 3, 1 };
-  //float options[3] = {0,0,0};
-  FileController file_controller;
-
-  file_controller.ReadHighscore(highscores);
-  for(int i = 0; i < 5; i++) {
-    std::cout << i << " - " << highscores[i] << "\n";
-  }
-
-  file_controller.ReadOptions(opt);
-  std::cout << "option 1 - " << opt.world_size << "\n";
-  std::cout << "option 1 - " << opt.snake_speed << "\n";
-
-  //struct options o;
-  MainMenu();
-
-  return 0;
-}
-*/

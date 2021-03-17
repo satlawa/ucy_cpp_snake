@@ -2,25 +2,26 @@
 
 This is the submission for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The program is an extend of the Snake game provided by Udacitys repo https://github.com/udacity/CppND-Capstone-Snake-Game.
 
-The core modifications are the following
+The core modifications of the Snake Game starter code are the following:
 
-Object Oriented
-The provided code was already written in an object oriented way, however the class Snake had attributes that wehere not encapsulated and thus open to user manipulation. This was changed and all Code is now encasulated.
+### OBJECT ORIENTED
+The provided code was already written in an object oriented way, however the Class `Snake` had attributes that where public and thus open to user manipulation. This was changed and all code is now encapsulated.`
 
-MENU
-The main enhancment to the project is the addition of a Game menu, that shows up when the user starts the game. The Menu consists of three submenus that have the following possibilities:
+### MENU
+The main enhancement to the starter project is the addition of a Game Menu. This Game Menu shows up when the user starts the game and consists of three sub menus that have the following capabilities:
 
-The menues allow the user to
-* start the game,
-* look and reset the previous highscores
-* look and change the current game options
+The menus allow the user to:
+* start the game
+* view and reset the previous highscores
+* view and change the current game-options
 * quit the game
 
-The Menus are implemented in the Class Menu (menu.cpp, menu.h)
+Accessing the **Highscore Menu** allows the user to view the top 5 highscores and reset the highscores. The **Options Menu** accessed through the **Main Menu** allows the user to view the current game-options such as **World Size**, **Snake Speed** and **Snake Speed Increase**.
+The Menus are implemented in the Class `Menu` (files: `menu.cpp`, `menu.h`)
 
-I/O
-An further addition is the ability to save the options that the user can manipulate such as snake speed and speed increase and the top 5 highscores to files on the harddisk.
-When this data is manipulation by thee user, it is imedietly written to disk minimizing the data loss in the case of a program crash. In the process of starting the program the data is automatically loaded into the game and is accessable. The reading and writing of the files is implemented in the Class FileController (file_controller.cpp, file_controller.h) and the data is stored in the files options.txt and highscores.txt.
+### I/O
+An other addition to the starter code is the ability to save the top 5 highscores and the game-options that the user manipulated to files on the harddisk. This allows the game to preserve the highscores as well as the options beyond the termination of the program. Whenever some of the data is changed by the user, it is immediately written to disk minimizing the chance of data loss in the case of a program crash. In the process of starting the program the data is automatically loaded into the game.
+The reading and writing of the files is implemented in the Class `FileController` (files: `file_controller.cpp`, `file_controller.h`) and the data is stored in the files `options.txt` and `highscores.txt`.
 
 
 ## Dependencies for Running Locally
@@ -46,33 +47,29 @@ When this data is manipulation by thee user, it is imedietly written to disk min
 4. Run it: `./SnakeGame`.
 
 
-### Project Requirements fullfilled
+## Project Requirements fullfilled
 
-##Loops, Functions, I/O
+### Loops, Functions, I/O
 
-#The project reads data from a file and process the data, or the program writes data to a file.
-The project reads data from an external file or writes data to a file as part of the necessary operation of the program.
-The project was extended to write game options ans the highscore into a file and reads it with the start of the program. Class FileController is responsible for reading and writing the data to files.
+**The project reads data from a file and process the data, or the program writes data to a file.**
+*The project reads data from an external file or writes data to a file as part of the necessary operation of the program.*
+The project was extended to write the game-options and the highscore into files and read it on the start of the program. Class `FileController` is responsible for reading and writing the data to files.
 
-#The project accepts user input and processes the input.
-The project accepts input from a user as part of the necessary operation of the program.
-By adding the menu to the game the user is able to change some basic settings as well as have a look at the highsores.
+**The project accepts user input and processes the input.**
+*The project accepts input from a user as part of the necessary operation of the program.*
+By adding the menu to the game the user is able to change some basic settings as well as have a look at the highsores (Class `Menu`).
 
 
-##Object Oriented Programming
-The project code is organized into classes with class attributes to hold the data, and class methods to perform tasks.
+### Object Oriented Programming
 
-#The project uses Object Oriented Programming techniques.
-The project code is organized into classes with class attributes to hold the data, and class methods to perform tasks.
+**The project uses Object Oriented Programming techniques.**
+*The project code is organized into classes with class attributes to hold the data, and class methods to perform tasks.*
 The whole project is designed with Object Oriented Programming techniques in mind.
 
-#Classes use appropriate access specifiers for class members.
-All class data members are explicitly specified as public, protected, or private.
-All new classes where designd to meet this criteria. Additionally the attributes of the snake class where categorised as private ()
+**Classes use appropriate access specifiers for class members.**
+*All class data members are explicitly specified as public, protected, or private.*
+All new Classes (`Menu`, `FileController`) where designed to meet this criteria. Additionally, all attributes of the Class `Snake` where categorized as private.
 
-#Class constructors utilize member initialization lists.
-All class members that are set to argument values are initialized through member initialization lists.
-
-#Classes encapsulate behavior.
-Appropriate data and functions are grouped into classes. Member data that is subject to an invariant is hidden from the user. State is accessed via member functions.
-All new classes where designd to meet this criteria. Additionally the attributes of the snake class where encapsulated so that they can be accessed just via member functions.
+**Classes encapsulate behavior.**
+*Appropriate data and functions are grouped into classes. Member data that is subject to an invariant is hidden from the user. State is accessed via member functions.*
+As stated in the paragraph above all new Classes (`Menu`, `FileController`) and the attributes of the Class `Snake` where encapsulated so that they can just be accessed just via member functions.

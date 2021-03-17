@@ -38,18 +38,6 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-/*
-void Renderer::Menu() {
-  TTF_Init();
-  TTF_Font * font = TTF_OpenFont("NotoSans.ttf", 14);
-  SDL_Color color = { 255, 255, 255 };
-  SDL_Surface * surface = TTF_RenderText_Solid(font, "Sake Game", color);
-  SDL_Texture * texture = SDL_CreateTextureFromSurface(sdl_renderer, surface);
-
-  // Update Screen
-  SDL_RenderPresent(sdl_renderer);
-}*/
-
 void Renderer::Render(Snake const snake, SDL_Point const &food) {
   SDL_Rect block;
   block.w = screen_width / grid_width;

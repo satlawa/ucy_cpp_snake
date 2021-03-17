@@ -18,7 +18,7 @@ int Game::Run(Controller const &controller, Renderer &renderer,
   Uint32 frame_end;
   Uint32 frame_duration;
   int frame_count = 0;
-  bool running = true;
+  //bool running = true;
 
   while (running) {
     frame_start = SDL_GetTicks();
@@ -57,7 +57,6 @@ void Game::PlaceFood() {
   while (true) {
     x = random_w(engine);
     y = random_h(engine);
-    std::cout << "X: " << x << "Y: " << y <<"\n";
     // Check that the location is not occupied by a snake item before placing
     // food.
     if (!snake.SnakeCell(x, y)) {
@@ -69,7 +68,10 @@ void Game::PlaceFood() {
 }
 
 void Game::Update() {
-  if (!snake.GetAlive()) return;
+  if (!snake.GetAlive()) {
+    running = false;
+    return;
+  }
 
   snake.Update();
 
